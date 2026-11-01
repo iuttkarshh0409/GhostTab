@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+coverage/
+src-tauri/target/
+
+# Rust / Tauri
+src-tauri/target/debug/
+src-tauri/target/release/
+src-tauri/gen/schemas/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# TypeScript / Vite
+*.tsbuildinfo
+vite.config.ts.timestamp-*
+
+# Env secrets
+.env
+.env.*
+!.env.example
+
+# Temporary dev-only runners / probes (never packaged)
+dev-runner.cjs
+probe-*.cjs
+runner-vcvars.bat
+sleep.cjs
+wait.cjs
+run.cjs
+probe-paths.js
+probe-tauri.cjs
+tauri.cjs
+gen-icon.cjs
+
+# Local repo tooling state
+tools/repo-config.json
+tools/kill-process.cjs
