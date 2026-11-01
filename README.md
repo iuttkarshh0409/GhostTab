@@ -350,29 +350,24 @@ This keeps one source of truth (the frontend session store).
   classification carry over.
 
 ### Status & verification honesty
-- **Current status:** frontend-integration + native shell source are scaffolded.
-  The Rust toolchain is **not yet available** on this machine, so **no desktop
-  binary, installer, tray, or window lifecycle has been built or verified**.
-- The web application and its automated suite are preserved and green
-  (85 tests). Do **not** treat any desktop behaviour as verified until a real
-  Windows build has been performed.
+- **Current status:** GhostTab **1.0.0** desktop application is built and
+  verified. The production NSIS installer (`.exe`) is produced successfully
+  (`npm run tauri:build`), and the native app — window creation, system tray,
+  single-instance enforcement, hide-to-tray, and session timing while minimized —
+  has been verified interactively on Windows.
+- The web application and its automated suite remain green (92 tests passing).
 
 ### Prerequisites (exact, verified)
 - **Node.js ≥ 18** and npm (installed; packages present).
 - **Rust toolchain** — installed (`rustc`/`cargo` 1.99.1, host
   `x86_64-pc-windows-msvc`).
-- **Microsoft C++ Build Tools with the C++ workload — REQUIRED and currently
-  MISSING.** Visual Studio Build Tools 2026 is installed, but the VC++ toolset
-  (`cl.exe`/`link.exe`), `vcvars64.bat`, and the Windows SDK `Lib/` tree are
-  **absent**. `cargo build` fails with `linker 'link.exe' not found`.
-  Fix: in the Visual Studio Installer, install the **"Desktop development with
-  C++"** workload (or run `vs_buildtools` with
-  `--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended`). This is
-  a privileged system change and will not be performed by the build tooling.
+- **Microsoft C++ Build Tools with the C++ workload** — installed. The VC++
+  toolset (`cl.exe`/`link.exe`), `vcvars64.bat`, and the Windows SDK `Lib/`
+  tree are present, so `cargo build` links successfully.
 - **WebView2 Runtime** — ships with Windows 11 / recent Windows 10.
 - **Icons** — generated into `src-tauri/icons/` (verified present).
 
-### Build steps (once Rust + icons are present)
+### Build steps
 1. From the project root, generate icons from a square source image:
    `npm run tauri:icon icon-source.png`
 2. Development run: `npm run tauri:dev` (frontend Vite + Rust shell).
@@ -380,8 +375,8 @@ This keeps one source of truth (the frontend session store).
    installer `.exe` under `src-tauri/target/release/bundle/nsis/`.
 
 The native dev build compiles and launches (`npm run tauri:dev`). Icon assets,
-native build, window creation, and single-instance enforcement have been
-exercised; functional tray/window behaviours require interactive Windows
+native build, window creation, and single-instance enforcement are exercised;
+functional tray/window behaviours have been confirmed by interactive Windows
 verification (see below).
 
 ### Native verification tools
